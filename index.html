@@ -660,7 +660,7 @@ async function saveTask(){
   };
   showLoading('Saving task...');
   var r;
-  if(editingTaskId){
+  if(editingTaskId!=null){
     r=await sb.from('pbi_tasks').update(payload).eq('id',editingTaskId);
   }else{
     r=await sb.from('pbi_tasks').insert(payload);
@@ -929,7 +929,7 @@ function closeModal(type){document.getElementById('modal-'+type).classList.remov
 document.querySelectorAll('.modal-overlay').forEach(function(o){o.addEventListener('click',function(e){if(e.target===o)o.classList.remove('open');});});
 
 function editTask(id){
-  var t=tasks.find(function(x){return x.id===id;});if(!t)return;
+  var t=tasks.find(function(x){return x.id==id;});if(!t)return;
   editingTaskId=id;refreshDropdowns();
   document.getElementById('modal-task-title').textContent='Edit Task · '+id;
   document.getElementById('f-report').value=t.report;document.getElementById('f-owner').value=t.owner;
